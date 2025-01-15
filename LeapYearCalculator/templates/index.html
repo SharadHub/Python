@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leap Year Calculator</title>
+    <!-- style css -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            color: #333;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+            margin: 20px;
+            overflow-y: auto;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input {
+            width: calc(100% - 10px);
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: #e9ecef;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .reset-btn {
+            background-color: #dc3545;
+        }
+        .reset-btn:hover {
+            background-color: #b02a37;
+        }
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Leap Year Calculator</h1>
+
+        <!-- Single Year Section -->
+        <div class="section">
+            <h2>Check Single Year</h2>
+            <form method="POST">
+                <label for="single_year">Enter a year:</label>
+                <input type="number" id="single_year" name="single_year" placeholder="e.g., 2024" required>
+                <button type="submit">Check Leap Year</button>
+            </form>
+            <div class="result">
+                {% if single_year_result %}
+                    <p>{{ single_year_result }}</p>
+                    <p><strong>Why?</strong> {{ explanation }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- input section for the range of the years to fnd leap years -->
+        <div class="section">
+            <h2>Calculate Leap Years in Range</h2>
+            <form method="POST">
+                <label for="start_year">Start Year:</label>
+                <input type="number" id="start_year" name="start_year" placeholder="e.g., 2000" required>
+                <label for="end_year">End Year:</label>
+                <input type="number" id="end_year" name="end_year" placeholder="e.g., 2024" required>
+                <button type="submit">Calculate Leap Years</button>
+            </form>
+            <div class="result">
+                {% if leap_year_range_result %}
+                    <h3>Leap Years:</h3>
+                    <ul>
+                        {% for year in leap_year_range_result %}
+                            <li>{{ year }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {% if explanation and leap_year_range_result %}
+                    <p><strong>Why?</strong> {{ explanation }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- button to reset the input -->
+        <form method="GET">
+            <button class="reset-btn" type="submit">Reset</button>
+        </form>
+    </div>
+</body>
+</html>
